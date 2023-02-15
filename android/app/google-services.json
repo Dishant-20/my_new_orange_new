@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "441606888982",
+    "project_id": "my-new-orange",
+    "storage_bucket": "my-new-orange.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441606888982:android:48923729f774b8569b9f37",
+        "android_client_info": {
+          "package_name": "com.dishu.prod.my_new_orange"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441606888982-cukcqtc7ledast26hb5l4864opt9p79t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAghG2Bn6tWI4JzBuV_6axE237iX0Vrmk0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441606888982-cukcqtc7ledast26hb5l4864opt9p79t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
