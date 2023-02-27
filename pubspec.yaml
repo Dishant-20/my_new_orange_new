@@ -45,6 +45,7 @@ dependencies:
   flutter_otp_text_field: ^1.1.1
   devicelocale: ^0.6.0
   intl_phone_field: ^3.1.0
+  shared_preferences: ^2.0.15
   # reference:
 
 dev_dependencies:

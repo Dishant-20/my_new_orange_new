@@ -4,6 +4,7 @@ import 'dart:async';
 
 // import 'dart:math';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_new_orange/classes/get_started_now/get_started_now.dart';
@@ -25,23 +26,47 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   //
+  RemoteMessage? initialMessage;
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  //
   FirebaseAuth firebase_auth = FirebaseAuth.instance;
 
   late Timer _timer;
   int _start = 2;
-
+  //
+  String? notifTitle, notifBody;
+  //
   @override
   void initState() {
     super.initState();
-    // print('object');
-    // func_calculate();
-    //
-    // func_anonymously_firebase_check();
-    // FirebaseAuth.instance.signInAnonymously();
-
-    // FirebaseAuth.instance.signOut();
 
     startTimer();
+  }
+
+// get notification in foreground
+  func_get_full_data_of_notification() {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('=====> GOT NOTIFICATION IN FOREGROUND <=====');
+      print('Message data: ${message.data}');
+      if (message.notification != null) {
+        print('Message also contained a notification: ${message.notification}');
+        setState(() {
+          notifTitle = message.notification!.title;
+          notifBody = message.notification!.body;
+        });
+      }
+    });
+  }
+
+  func_click_on_notification() {
+// FirebaseMessaging.configure
+
+    FirebaseMessaging.onMessageOpenedApp.listen((remoteMessage) {
+      if (kDebugMode) {
+        print('=====> CLICK NOTIFICATIONs <=====');
+        print(remoteMessage.data);
+      }
+    });
   }
 
   @override
@@ -115,7 +140,9 @@ class _SplashScreenState extends State<SplashScreen> {
   func_anonymously_firebase_check() async {
     try {
       final userCredential = await FirebaseAuth.instance.signInAnonymously();
-      print("Signed in with temporary account.");
+      if (kDebugMode) {
+        print("Signed in with temporary account.");
+      }
 
       print(userCredential);
       // print(userCredential.user!.uid);
@@ -126,10 +153,10 @@ class _SplashScreenState extends State<SplashScreen> {
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case "operation-not-allowed":
-          print("Anonymous auth hasn't been enabled for this project.");
+          // print("Anonymous auth hasn't been enabled for this project.");
           break;
         default:
-          print("Unknown error.");
+        // print("Unknown error.");
       }
     }
   }
@@ -182,20 +209,20 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   func_calculate() {
-    for (int i = 1; i < 100; i++) {
-      // print(i);
+    // for (int i = 1; i < 100; i++) {
+    //   // print(i);
 
-      if (i % 3 == 0) {
-        print('divisible by 3 ===> $i');
-      }
-      if (i % 5 == 0) {
-        print('divisible by 5 ===> $i');
-      }
-      if (i % 3 == 0 && i % 5 == 0) {
-        print('divisible by 3,5 ===> $i');
-      } else {
-        print('n.a.');
-      }
-    }
+    //   if (i % 3 == 0) {
+    //     print('divisible by 3 ===> $i');
+    //   }
+    //   if (i % 5 == 0) {
+    //     print('divisible by 5 ===> $i');
+    //   }
+    //   if (i % 3 == 0 && i % 5 == 0) {
+    //     print('divisible by 3,5 ===> $i');
+    //   } else {
+    //     print('n.a.');
+    //   }
+    // }
   }
 }
