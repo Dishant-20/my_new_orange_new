@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_new_orange/classes/login_via_phone_number/login_via_phone_number.dart';
 import 'package:my_new_orange/header/utils/Utils.dart';
 import 'package:my_new_orange/login/login.dart';
 import 'package:my_new_orange/registration/registration.dart';
@@ -100,12 +101,21 @@ class _GetStartedNowScreenState extends State<GetStartedNowScreen> {
                     Expanded(
                       child: InkWell(
                         onTap: () {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => const LoginScreen(),
+                          //   ),
+                          // );
+                          //
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
+                              builder: (context) =>
+                                  const LoginViaPhoneNumberScreen(),
                             ),
                           );
+                          //
                         },
                         child: Container(
                           margin: const EdgeInsets.only(
